@@ -23,7 +23,7 @@ required.
   attributes. Every proposed path is checked against the document to
   ensure it identifies the selected node uniquely. If necessary, the
   engine anchors to a unique ancestor or uses an absolute path.
-- *Absolute* paths start at the document root and include sibling
+- Absolute paths start at the document root and include sibling
   positions, such as ~/html[1]/body[1]/main[1]/button[3]~.
 - Selecting a node in Elements generates its path while *Follow
   Elements selection* is enabled. Editing the query automatically
@@ -50,7 +50,7 @@ required.
 
 ** Example queries
 
-#+begin_src xpath
+#+begin_src text
 //button[@data-testid='save-receipt']
 //input/@name
 //comment()
