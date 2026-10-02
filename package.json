@@ -1,0 +1,15 @@
+{
+  "name": "dom-cat",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Development checks for the DOM Cat Chrome extension",
+  "scripts": {
+    "test": "node --test tests/dom.test.cjs",
+    "test:browser": "node --test tests/browser.test.cjs",
+    "preview": "node tests/build-harness.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1",
+    "jsdom": "26.1.0"
+  }
+}

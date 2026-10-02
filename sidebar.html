@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>DOM Cat</title>
+    <link rel="stylesheet" href="sidebar.css" />
+    <script src="xpath-engine.js" defer></script>
+    <script src="sidebar.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="brand">
+        <img class="logo" src="icons/icon48.png" alt="DOM Cat logo" />
+        <div>
+          <h1>DOM Cat</h1>
+          <p>You're the man now, cat</p>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section aria-labelledby="query-heading">
+        <div class="section-heading">
+          <h2 id="query-heading">QUERY</h2>
+        </div>
+        <div class="settings">
+          <label
+            >Path
+            <select id="path-mode">
+              <option value="smart">Smart</option>
+              <option value="absolute">Absolute</option>
+            </select></label
+          ><label
+            >Context
+            <select id="context">
+              <option value="selected">Selected document</option>
+              <option value="main">Main document</option>
+            </select></label
+          >
+        </div>
+        <label class="follow"
+          ><input type="checkbox" id="follow" checked /> Follow Elements
+          selection</label
+        >
+        <label class="sr-only" for="xpath-input">XPath expression</label
+        ><textarea
+          id="xpath-input"
+          rows="4"
+          spellcheck="false"
+          placeholder="Inspect an element, or enter an XPath…"
+        ></textarea>
+        <div class="actions">
+          <button id="run" class="primary">Run query <kbd>Ctrl ↵</kbd></button
+          ><button id="copy-query">Copy XPath</button
+          ><button
+            id="use-selection"
+            title="Generate a path for the currently inspected node"
+          >
+            Use selected
+          </button>
+        </div>
+        <details id="alternatives-section" hidden>
+          <summary>Alternative paths</summary>
+          <div id="alternatives"></div>
+        </details>
+        <p id="status" class="status" role="status" aria-live="polite">
+          Inspect an element in Chrome’s Elements panel to begin.
+        </p>
+      </section>
+      <section aria-labelledby="results-heading" class="results-section">
+        <div class="section-heading">
+          <h2 id="results-heading">
+            RESULTS <span id="count" class="badge">0</span>
+          </h2>
+          <div class="result-actions">
+            <button id="highlight" disabled>Highlight again</button
+            ><button id="copy-results" disabled>Copy results</button>
+          </div>
+        </div>
+        <p id="result-summary" class="muted">Matches will appear here.</p>
+        <div id="results" class="results">
+          <div class="empty">
+            <span aria-hidden="true">⌕</span>
+            <p>Find exactly what you’re looking for.</p>
+            <small>Smart paths prefer test attributes and unique IDs.</small>
+          </div>
+        </div>
+      </section>
+      <details class="history-section">
+        <summary>
+          Recent queries <button id="clear-history" type="button">Clear</button>
+        </summary>
+        <div id="history">
+          <p class="muted">Run a query to save it here.</p>
+        </div>
+      </details>
+    </main>
+    <footer>XPath 1.0 · Local history · No tracking</footer>
+    <div id="toast" role="status" aria-live="polite" hidden></div>
+  </body>
+</html>
