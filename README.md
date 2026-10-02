@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/dom-cat-logo.png" alt="DOM Cat logo">
+</p>
+
 A Chrome DevTools extension for generating and testing XPath locators.
 No build step, server, account, or runtime dependencies are required.
 
