@@ -5,8 +5,8 @@ const ui = Object.fromEntries(
     "xpath-input",
     "path-mode",
     "context",
+    "result-limit",
     "follow",
-    "source",
     "status",
     "count",
     "results",
@@ -117,7 +117,8 @@ function renderResult(result, query, selectedContext) {
   }
   ui.count.textContent = result.count.toLocaleString();
   const limits = [];
-  if (result.limited) limits.push("showing first 200 matches");
+  if (result.limited)
+    limits.push("showing first " + result.displayLimit + " matches");
   if (result.items.some((item) => item.truncated))
     limits.push("text limited to 4,000 characters per match");
   ui["result-summary"].textContent =
@@ -224,7 +225,13 @@ async function runQuery(save = false) {
   try {
     const result = await call(
       "evaluate",
-      JSON.stringify(query) + "," + selection + "," + selectedContext,
+      JSON.stringify(query) +
+        "," +
+        selection +
+        "," +
+        selectedContext +
+        "," +
+        JSON.stringify(ui["result-limit"].value),
     );
     if (token !== revision) return;
     renderResult(result, query, selectedContext);
@@ -256,7 +263,6 @@ async function useSelection() {
     );
     if (token !== revision) return;
     ui["xpath-input"].value = result.query;
-    ui.source.textContent = result.label;
     ui.alternatives.replaceChildren();
     ui["alternatives-section"].hidden = result.alternatives.length < 2;
     for (const path of result.alternatives) {
@@ -270,7 +276,6 @@ async function useSelection() {
     if (token !== revision) return;
     resetResults("Select a document element to generate a path.");
     ui["alternatives-section"].hidden = true;
-    ui.source.textContent = "Selection unavailable";
     status(error.message, "error");
   }
 }
@@ -278,7 +283,6 @@ function manualEdit() {
   invalidate();
   // Pin a manually authored query so Inspect and selection changes do not replace it.
   ui.follow.checked = false;
-  ui.source.textContent = "Manual XPath";
   ui["alternatives-section"].hidden = true;
   status("Editing query…");
   debounce = setTimeout(() => runQuery(), 250);
@@ -318,6 +322,7 @@ function saveSettings() {
       xpathFinderSettings: {
         mode: ui["path-mode"].value,
         context: ui.context.value,
+        resultLimit: ui["result-limit"].value,
         follow: ui.follow.checked,
       },
     })
@@ -392,6 +397,12 @@ ui.context.addEventListener("change", () => {
   saveSettings();
   ui.follow.checked ? useSelection() : runQuery();
 });
+ui["result-limit"].addEventListener("change", () => {
+  saveSettings();
+  if (ui["result-limit"].value === "unlimited")
+    toast("Unlimited results may slow or freeze DevTools.");
+  runQuery();
+});
 ui.follow.addEventListener("change", () => {
   saveSettings();
   if (ui.follow.checked) useSelection();
@@ -445,6 +456,11 @@ async function initialize() {
       ui["path-mode"].value =
         settings.mode === "absolute" ? "absolute" : "smart";
       ui.context.value = settings.context === "main" ? "main" : "selected";
+      ui["result-limit"].value = ["100", "500", "1000", "5000", "unlimited"].includes(
+        settings.resultLimit,
+      )
+        ? settings.resultLimit
+        : "500";
       ui.follow.checked = settings.follow !== false;
     }
   } catch {

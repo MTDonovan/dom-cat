@@ -27,25 +27,18 @@ required.
   positions, such as ~/html[1]/body[1]/main[1]/button[3]~.
 - Selecting a node in Elements generates its path while *Follow
   Elements selection* is enabled. Editing the query automatically
-  pauses following to protect your work. *Use selected* generates a
-  new path once; checking Follow resumes continuous following.
+  pauses following. *Use selected* generates a new path once.
 - Queries evaluate after a short typing pause. Click *Run query* or
   press *Ctrl+Enter* (Cmd+Enter on macOS) to evaluate and save the
   query in history.
-- *Alternative paths* offers other verified paths for the inspected
-  node.
-- *Inspect* selects a matching node in Elements. Attribute matches
-  select their owner element. Matches are evaluated again when
-  inspecting, so a changing page may change their positions; rerun the
-  query after page changes.
-- Running a node query automatically draws temporary boxes for three
+- Running a query automatically draws temporary boxes for three
   seconds around element and text matches. It uses a separate overlay
   and does not change the matched elements' styles. Use *Highlight
   again* to refresh boxes after scrolling or resizing.
 - *Copy XPath* copies the current expression. *Copy results* copies
-  displayed text values, with one result per line.
+  displayed text value results, separated by newlines.
 - *Recent queries* keeps the last 20 explicitly run queries
-  locally. Click one to run it again, or *Clear* to remove saved
+  locally. Click one to run it again, or *Clear* to remove the
   history.
 
 ** Example queries
@@ -67,24 +60,25 @@ an error and clear the previous result state.
 * Document context and limits
 
 - *Selected document* evaluates against the inspected node's document
-  when accessible; otherwise, with no selection, it uses the main
+  when accessible. Otherwise, with no selection, it uses the main
   document. This supports accessible frame documents. *Main document*
   always queries the top document. A generated path for a frame node
   is relative to that frame's document.
 - XPath does not cross iframe or shadow-root boundaries. Shadow-root
   selections receive a clear error. Cross-origin or isolated frames
   can be inaccessible through the top-frame DevTools evaluation
-  context; this version does not provide a frame picker for those
+  context. This version does not provide a frame picker for those
   cases.
 - Expressions use the browser's XPath 1.0 implementation. Namespaced
   SVG paths use ~local-name()~ and ~namespace-uri()~.
-- Results display at most 200 nodes and 4,000 text characters per
-  node. The count remains exact, and the interface identifies
-  truncation. Copy results copies the displayed, bounded
-  values. Highlighting considers the first 100 matches and draws at
-  most 300 boxes.
-- Queries run on demand, after editing, or after selection changes;
-  the extension does not continuously watch DOM mutations.
+- The Results menu controls how many nodes are displayed and copied:
+  100, 500 (the default), 1,000, 5,000, or Unlimited. The count
+  remains exact, and the interface identifies truncation. Unlimited
+  can slow or freeze DevTools on very large match sets. Each displayed
+  result remains limited to 4,000 text characters. Highlighting
+  considers the first 100 matches and draws at most 300 boxes.
+- Queries run on demand, after editing, or after selection
+  changes. The extension does not continuously watch DOM mutations.
 
 * Privacy and permissions
 
@@ -93,12 +87,12 @@ preferences, and ~clipboardWrite~ only to copy XPath expressions or
 displayed results when you request it. It has no external requests or
 telemetry. Query history and preferences use ~chrome.storage.local~,
 not Chrome Sync. Inspected result text is not saved. History may
-contain values you include in a query; use Clear to remove it.
+contain values you include in a query. Use *Clear* to remove it.
 
 * Development and checks
 
 All extension code is plain JavaScript, HTML, and CSS. ~devtools.js~
-registers the pane once; ~sidebar.js~ controls the interface;
+registers the pane once. ~sidebar.js~ controls the interface.
 ~xpath-engine.js~ supplies the self-contained engine serialized into
 the inspected page. Query expressions are encoded using
 ~JSON.stringify~ before evaluation, and results render using text
@@ -115,9 +109,11 @@ The DOM suite exercises unique locators, duplicate IDs and classes,
 quote escaping, node counts, scalar expressions, invalid queries,
 comments/text nodes, detached and shadow nodes, safe result rendering,
 result limits, query history, and asynchronous callback
-ordering. jsdom lacks the necessary namespace XPath behavior for two
-cases (SVG and namespaced attribute paths); those checks are retained
-in the browser suite.
+ordering.
+
+jsdom lacks the necessary namespace XPath behavior for two cases (SVG
+and namespaced attribute paths). Those checks are retained in the
+browser suite.
 
 For the Chromium browser suite:
 
@@ -128,17 +124,9 @@ npm run test:browser
 
 To create a standalone visual and regression harness, run ~npm run
 preview~ and open ~tests/harness.html~ in Chrome. Its sidebar uses
-mocked DevTools events and storage. Browser tests exercise the DOM
-engine and sidebar interactions; they do not verify Chrome's actual
-extension loader, native Elements integration, or clipboard
-permissions. Check those manually after installing the unpacked
-extension.
+mocked DevTools events and storage.
 
-** Validation performed for this revision
-
-Local DOM regression checks and sidebar interaction tests were
-run. Native Chromium execution and visual inspection could not be
-completed in the editing environment because its browser download
-failed and the available cloud browser blocked local-file access. Run
-the browser suite and install the extension to confirm those remaining
-checks on your machine.
+Browser tests exercise the DOM engine and sidebar interactions. They
+do not verify Chrome's actual extension loader, native Elements
+integration, or clipboard permissions. Check those manually after
+installing the unpacked extension.

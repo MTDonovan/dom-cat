@@ -4,7 +4,7 @@ const { JSDOM } = require("jsdom");
 const { engine, regression, html } = require("./build-harness.cjs");
 const tick = (ms = 30) => new Promise((resolve) => setTimeout(resolve, ms));
 
-test("XPath DOM regressions (26 checks; namespace cases require Chromium)", () => {
+test("XPath DOM regressions (27 checks; namespace cases require Chromium)", () => {
   const dom = new JSDOM(
     '<!doctype html><pre id="test-report"></pre><iframe id="fixture"></iframe>',
     { runScripts: "dangerously" },
@@ -14,7 +14,7 @@ test("XPath DOM regressions (26 checks; namespace cases require Chromium)", () =
     dom.window.eval(regression);
     const report = dom.window.document.getElementById("test-report");
     assert.equal(report.dataset.failed, "0", report.textContent);
-    assert.match(report.textContent, /^26 passed, 0 failed, 2 skipped/);
+    assert.match(report.textContent, /^27 passed, 0 failed, 2 skipped/);
   } finally {
     dom.window.close();
   }
@@ -36,6 +36,7 @@ function input(dom, query) {
 test("Sidebar initialization, query editing, errors, scalars, and history", async () => {
   const dom = sidebarDOM();
   const doc = dom.window.document;
+  const fixture = doc.querySelector("iframe").contentDocument;
   try {
     await tick();
     assert.equal(doc.getElementById("count").textContent, "1");
@@ -64,6 +65,32 @@ test("Sidebar initialization, query editing, errors, scalars, and history", asyn
     await tick();
     assert.equal(doc.getElementById("xpath-input").value, "//button");
     assert.equal(doc.querySelectorAll("#history button").length, 1);
+    const copyTargets = fixture.createElement("div");
+    for (let index = 0; index < 520; index++) {
+      const target = fixture.createElement("span");
+      target.setAttribute("data-copy-result", "");
+      target.textContent = "Result " + index;
+      copyTargets.append(target);
+    }
+    fixture.body.append(copyTargets);
+    input(dom, "//*[@data-copy-result]");
+    await tick();
+    assert.equal(doc.querySelectorAll(".result-row").length, 500);
+    doc.getElementById("copy-results").click();
+    await tick();
+    assert.deepEqual(copied.split("\n"), [
+      ...Array.from({ length: 500 }, (_, index) => "Result " + index),
+    ]);
+    const resultLimit = doc.getElementById("result-limit");
+    resultLimit.value = "unlimited";
+    resultLimit.dispatchEvent(new dom.window.Event("change", { bubbles: true }));
+    await tick(100);
+    assert.equal(doc.querySelectorAll(".result-row").length, 520);
+    doc.getElementById("copy-results").click();
+    await tick();
+    assert.deepEqual(copied.split("\n"), [
+      ...Array.from({ length: 520 }, (_, index) => "Result " + index),
+    ]);
     input(dom, "count(//button)");
     await tick();
     assert.equal(doc.getElementById("count").textContent, "number");

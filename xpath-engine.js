@@ -209,7 +209,7 @@ function createXPathEngine() {
       context: doc === document ? "Main document" : "Selected frame document",
     };
   }
-  function evaluate(query, selected, useSelection = true) {
+  function evaluate(query, selected, useSelection = true, resultLimit = 500) {
     clearHighlight();
     const doc = context(selected, useSelection);
     const result = doc.evaluate(query, doc, null, 0, null);
@@ -223,8 +223,18 @@ function createXPathEngine() {
     if (result.resultType === 3)
       return { ...base, kind: "boolean", value: String(result.booleanValue) };
     const nodes = snapshot(query, doc);
+    const limit =
+      resultLimit === "unlimited"
+        ? Infinity
+        : [100, 500, 1000, 5000].includes(Number(resultLimit))
+          ? Number(resultLimit)
+          : 500;
     const items = [];
-    for (let index = 0; index < Math.min(nodes.snapshotLength, 200); index++) {
+    for (
+      let index = 0;
+      index < Math.min(nodes.snapshotLength, limit);
+      index++
+    ) {
       const node = nodes.snapshotItem(index);
       const value = node.nodeType === 2 ? node.value : node.textContent || "";
       items.push({
@@ -240,6 +250,7 @@ function createXPathEngine() {
       count: nodes.snapshotLength,
       items,
       limited: nodes.snapshotLength > items.length,
+      displayLimit: Number.isFinite(limit) ? limit : null,
     };
   }
   function find(query, index, selected, useSelection = true) {
