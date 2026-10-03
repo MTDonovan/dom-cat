@@ -46,7 +46,7 @@ const report = document.getElementById('test-report');
 const output = [];
 let passed = 0, failed = 0, skipped = 0;
 function test(name,fn){
-  if (/jsdom/.test(navigator.userAgent) && ['Attribute path selects attribute','SVG namespaces'].includes(name)) {skipped++;output.push('SKIP '+name+' — jsdom namespace XPath limitation; run browser suite');return;}
+  if (/jsdom/.test(navigator.userAgent) && ['Attribute path selects attribute','Absolute attribute path selects attribute','SVG namespaces'].includes(name)) {skipped++;output.push('SKIP '+name+' — jsdom namespace XPath limitation; run browser suite');return;}
   try{fn();passed++;output.push('PASS '+name)}catch(error){failed++;output.push('FAIL '+name+' — '+error.message)}
 }
 function equal(actual,expected){if(actual!==expected)throw Error(JSON.stringify(actual)+' != '+JSON.stringify(expected))}
@@ -69,6 +69,7 @@ test('Number result',()=>equal(e.evaluate('count(//button)',get('main')).value,'
 test('Boolean result',()=>equal(e.evaluate('boolean(//input)',get('main')).value,'true'));
 test('Attribute values',()=>equal(e.evaluate('//input/@name',get('main')).items[0].text,'reference'));
 test('Attribute path selects attribute',()=>matched(get('input').getAttributeNode('name')));
+test('Absolute attribute path selects attribute',()=>{const n=get('input').getAttributeNode('name');const query=e.generate(n,'absolute').query;const result=doc.evaluate(query,doc,null,7,null);equal(result.snapshotLength,1);equal(result.snapshotItem(0),n)});
 test('Comments resolve by position',()=>{const n=Array.from(get('main').childNodes).filter(n=>n.nodeType===8)[1];matched(n)});
 test('Text nodes resolve by position',()=>matched(get('#text').lastChild));
 test('SVG namespaces',()=>matched(get('circle')));

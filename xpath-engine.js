@@ -48,17 +48,20 @@ function createXPathEngine() {
     );
     return nodeTest(node) + "[" + (siblings.indexOf(node) + 1) + "]";
   }
+  function attributeTest(node) {
+    return (
+      "@*[local-name()=" +
+      literal(node.localName) +
+      (node.namespaceURI
+        ? " and namespace-uri()=" + literal(node.namespaceURI)
+        : " and not(namespace-uri())") +
+      "]"
+    );
+  }
   function absolute(node) {
     if (node.nodeType === 9) return "/";
     if (node.nodeType === 2)
-      return (
-        absolute(node.ownerElement) +
-        "/@*[local-name()=" +
-        literal(node.localName) +
-        " and namespace-uri()=" +
-        literal(node.namespaceURI || "") +
-        "]"
-      );
+      return absolute(node.ownerElement) + "/" + attributeTest(node);
     const parts = [];
     for (
       let current = node;
@@ -180,14 +183,7 @@ function createXPathEngine() {
     if (mode !== "absolute" && paths.length === 0 && selected.nodeType !== 9) {
       const suffix = [];
       let child = selected.nodeType === 2 ? selected.ownerElement : selected;
-      if (selected.nodeType === 2)
-        suffix.unshift(
-          "@*[local-name()=" +
-            literal(selected.localName) +
-            " and namespace-uri()=" +
-            literal(selected.namespaceURI || "") +
-            "]",
-        );
+      if (selected.nodeType === 2) suffix.unshift(attributeTest(selected));
       while (child?.parentNode && child.parentNode.nodeType !== 9) {
         suffix.unshift(segment(child));
         const parent = child.parentNode;

@@ -4,7 +4,7 @@ const { JSDOM } = require("jsdom");
 const { engine, regression, html } = require("./build-harness.cjs");
 const tick = (ms = 30) => new Promise((resolve) => setTimeout(resolve, ms));
 
-test("XPath DOM regressions (27 checks; namespace cases require Chromium)", () => {
+test("XPath DOM regressions (30 checks; namespace cases require Chromium)", () => {
   const dom = new JSDOM(
     '<!doctype html><pre id="test-report"></pre><iframe id="fixture"></iframe>',
     { runScripts: "dangerously" },
@@ -14,7 +14,7 @@ test("XPath DOM regressions (27 checks; namespace cases require Chromium)", () =
     dom.window.eval(regression);
     const report = dom.window.document.getElementById("test-report");
     assert.equal(report.dataset.failed, "0", report.textContent);
-    assert.match(report.textContent, /^27 passed, 0 failed, 2 skipped/);
+    assert.match(report.textContent, /^27 passed, 0 failed, 3 skipped/);
   } finally {
     dom.window.close();
   }
