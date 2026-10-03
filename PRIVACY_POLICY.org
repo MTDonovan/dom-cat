@@ -9,10 +9,10 @@
 This Privacy Policy explains how the DOM Cat browser extension ("DOM
 Cat"), provided by *mtd* ("Developer"), handles information.
 
-DOM Cat is designed to operate locally within your browser. The
-Developer does not collect, receive, sell, or transmit your personal
-information, webpage content, browsing activity, XPath queries, or DOM
-Cat preferences.
+DOM Cat processes webpage content and XPath information locally in
+your browser and stores limited preferences and XPath query history
+locally on your device. This information is not transmitted to or
+received by the Developer or any third party.
 
 * 1. Information DOM Cat Processes
 

@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node --test tests/dom.test.cjs",
     "test:browser": "node --test tests/browser.test.cjs",
-    "preview": "node tests/build-harness.cjs"
+    "preview": "node tests/build-harness.cjs",
+    "postinstall": "npx playwright install"
   },
   "devDependencies": {
     "playwright": "1.62.1",
