@@ -7,6 +7,7 @@
     "test": "node --test tests/dom.test.cjs",
     "test:browser": "node --test tests/browser.test.cjs",
     "preview": "node tests/build-harness.cjs",
+    "package:chrome-store": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts\\package-chrome-store.ps1",
     "postinstall": "npx playwright install"
   },
   "devDependencies": {

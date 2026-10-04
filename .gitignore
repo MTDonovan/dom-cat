@@ -1,3 +1,4 @@
 node_modules/
 tests/harness.html
 test-results/
+dist/
