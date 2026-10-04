@@ -1,24 +1,20 @@
-#+TITLE: DOM Cat Privacy Policy
-#+AUTHOR: mtd
-#+DATE: 2026-10-02
+# DOM Cat Privacy Policy {#dom-cat-privacy-policy-1}
 
-* DOM Cat Privacy Policy
+**Last updated: October 2, 2026**
 
-*Last updated: October 2, 2026*
+This Privacy Policy explains how the DOM Cat browser extension (\"DOM
+Cat\"), provided by **mtd** (\"Developer\"), handles information.
 
-This Privacy Policy explains how the DOM Cat browser extension ("DOM
-Cat"), provided by *mtd* ("Developer"), handles information.
+DOM Cat processes webpage content and XPath information locally in your
+browser and stores limited preferences and XPath query history locally
+on your device. This information is not transmitted to or received by
+the Developer or any third party.
 
-DOM Cat processes webpage content and XPath information locally in
-your browser and stores limited preferences and XPath query history
-locally on your device. This information is not transmitted to or
-received by the Developer or any third party.
+# 1. Information DOM Cat Processes
 
-* 1. Information DOM Cat Processes
-
-DOM Cat processes information from the webpage currently being
-inspected through Chrome DevTools in order to generate, evaluate,
-display, and highlight XPath expressions and their results.
+DOM Cat processes information from the webpage currently being inspected
+through Chrome DevTools in order to generate, evaluate, display, and
+highlight XPath expressions and their results.
 
 Depending on the webpage, this information may include:
 
@@ -32,10 +28,10 @@ This processing occurs locally in your browser.
 DOM Cat does not transmit this information to the Developer or to any
 external server.
 
-* 2. Information Stored Locally
+# 2. Information Stored Locally
 
-DOM Cat uses =chrome.storage.local= to store limited information on
-your device.
+DOM Cat uses `chrome.storage.local`{.verbatim} to store limited
+information on your device.
 
 This may include:
 
@@ -45,29 +41,29 @@ This may include:
 Recent XPath queries may contain information that you manually include
 in an XPath expression.
 
-Inspected webpage content and displayed XPath result text are not
-stored by DOM Cat.
+Inspected webpage content and displayed XPath result text are not stored
+by DOM Cat.
 
 Stored information is not synchronized through Chrome Sync and is not
 transmitted to the Developer.
 
-You can remove stored query history using DOM Cat's *Clear*
-function. Local extension data can also be removed by uninstalling DOM
-Cat or by using applicable browser data-management controls.
+You can remove stored query history using DOM Cat\'s **Clear** function.
+Local extension data can also be removed by uninstalling DOM Cat or by
+using applicable browser data-management controls.
 
-* 3. Clipboard Access
+# 3. Clipboard Access
 
 DOM Cat requests permission to write to the clipboard.
 
-Clipboard access is used only when you explicitly request an action
-such as:
+Clipboard access is used only when you explicitly request an action such
+as:
 
-- *Copy XPath*; or
-- *Copy results*.
+- **Copy XPath**; or
+- **Copy results**.
 
 DOM Cat does not read the contents of your clipboard.
 
-* 4. Network Communication
+# 4. Network Communication
 
 DOM Cat does not make external network requests as part of its
 operation.
@@ -84,7 +80,7 @@ DOM Cat does not use:
 No webpage content, XPath query, result data, preference, or browsing
 information processed by DOM Cat is transmitted to the Developer.
 
-* 5. Accounts and Personal Information
+# 5. Accounts and Personal Information
 
 DOM Cat does not require an account or sign-in.
 
@@ -99,11 +95,11 @@ information such as your:
 - payment information; or
 - authentication information.
 
-DOM Cat may locally process such information if it appears on a
-webpage you choose to inspect. That information remains within your
-browser and is not transmitted to the Developer.
+DOM Cat may locally process such information if it appears on a webpage
+you choose to inspect. That information remains within your browser and
+is not transmitted to the Developer.
 
-* 6. Sharing of Information
+# 6. Sharing of Information
 
 The Developer does not sell, rent, disclose, or otherwise share
 information processed by DOM Cat with advertisers, data brokers,
@@ -114,51 +110,51 @@ user data to the Developer, the Developer does not have access to the
 webpages, XPath queries, results, or preferences processed by the
 extension.
 
-* 7. Data Retention
+# 7. Data Retention
 
 The Developer does not retain user data processed by DOM Cat because
 that information is not transmitted to or collected by the Developer.
 
 Information stored locally by the extension remains subject to your
-browser's storage lifecycle and your actions, including clearing DOM
-Cat's query history or uninstalling the extension.
+browser\'s storage lifecycle and your actions, including clearing DOM
+Cat\'s query history or uninstalling the extension.
 
-* 8. Chrome Web Store Limited Use
+# 8. Chrome Web Store Limited Use
 
-DOM Cat uses information accessed through browser APIs only as
-necessary to provide its disclosed functionality.
+DOM Cat uses information accessed through browser APIs only as necessary
+to provide its disclosed functionality.
 
 The use of information received from Google APIs will adhere to the
 Chrome Web Store User Data Policy, including the Limited Use
 requirements.
 
 DOM Cat does not use user data for advertising, profiling,
-creditworthiness, data brokerage, or any purpose unrelated to its
-XPath development and testing functionality.
+creditworthiness, data brokerage, or any purpose unrelated to its XPath
+development and testing functionality.
 
-* 9. Security
+# 9. Security
 
-DOM Cat is designed to minimize privacy and security risks by
-processing information locally and avoiding transmission of user data
-to external systems.
+DOM Cat is designed to minimize privacy and security risks by processing
+information locally and avoiding transmission of user data to external
+systems.
 
-No method of software operation can guarantee absolute
-security. However, DOM Cat does not maintain a remote database or
-server containing user information.
+No method of software operation can guarantee absolute security.
+However, DOM Cat does not maintain a remote database or server
+containing user information.
 
-* 10. Third-Party Websites
+# 10. Third-Party Websites
 
 DOM Cat may be used to inspect webpages provided by third parties.
 
 Those websites operate independently of DOM Cat and may have their own
 privacy policies and data practices.
 
-This Privacy Policy applies only to DOM Cat and does not govern
-websites or services inspected using the extension.
+This Privacy Policy applies only to DOM Cat and does not govern websites
+or services inspected using the extension.
 
-* 11. Changes to This Privacy Policy
+# 11. Changes to This Privacy Policy
 
-This Privacy Policy may be updated if DOM Cat's functionality or
+This Privacy Policy may be updated if DOM Cat\'s functionality or
 data-handling practices change.
 
 If an update materially changes how DOM Cat handles user data, the
@@ -168,11 +164,11 @@ changes take effect.
 The current version of this Privacy Policy will be made publicly
 available with its most recent revision date.
 
-* 12. Contact
+# 12. Contact
 
-Questions about this Privacy Policy or DOM Cat's data practices may be
+Questions about this Privacy Policy or DOM Cat\'s data practices may be
 sent to:
 
-* MTDonovan@outlook.com
+# MTDonovan@outlook.com
 
 Copyright © 2026 mtd. All rights reserved.
