@@ -1,0 +1,21 @@
+name: Package Chrome Store ZIP
+
+on:
+  workflow_dispatch:
+
+jobs:
+  package:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create ZIP
+        shell: pwsh
+        run: ./scripts/package-chrome-store.ps1
+
+      - name: Upload ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: dom-cat-chrome-store
+          path: dist/*-chrome-store.zip
+          if-no-files-found: error
