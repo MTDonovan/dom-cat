@@ -5,6 +5,10 @@
 A Chrome DevTools extension for generating and testing XPath locators. No build
 step, server, account, or runtime dependencies are required.
 
+Also, if you enjoy my work, please consider sending a tip on Ko-fi.
+
+<a href='https://ko-fi.com/K3K0M68XX' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi6.png?v=6' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+
 # Install or update
 
 1.  Extract this ZIP to a permanent folder on your computer.
