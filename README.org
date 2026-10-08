@@ -1,23 +1,21 @@
-#+begin_export html
+#+BEGIN_HTML
 <p align="center">
   <img src="./assets/dom-cat-logo.png" alt="DOM Cat logo">
 </p>
-#+end_export
+#+END_HTML
 
 A Chrome DevTools extension for generating and testing XPath locators. No build
 step, server, account, or runtime dependencies are required.
 
 Also, if you enjoy my work, please consider sending a tip on Ko-fi.
 
-#+begin_export html
+#+BEGIN_HTML
 <a href="https://ko-fi.com/K3K0M68XX">
-  <img
-    height="36"
-    src="https://storage.ko-fi.com/cdn/kofi6.png?v=6"
-    alt="Support me on Ko-fi"
-  >
+  <img height="36"
+       src="https://storage.ko-fi.com/cdn/kofi6.png?v=6"
+       alt="Support me on Ko-fi">
 </a>
-#+end_export
+#+END_HTML
 
 * Install or update
 
